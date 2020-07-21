@@ -42,7 +42,9 @@
 
         // zoom to point & add it to map
         map.setView([lat, lon], 10);
-        L.marker([lat, lon]).addTo(map);
+        //var datasets_yourmodel = new L.GeoJSON.AJAX("{% url 'api_tagged_location_detail' pk=object.pk %}",{
+           //query popup or color of polygon here
+        //}).addTo(map)
     }
 </script>
 

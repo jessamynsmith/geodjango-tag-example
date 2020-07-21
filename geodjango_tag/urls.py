@@ -9,4 +9,7 @@ urlpatterns = [
          name='tagged_location_detail'),
     path('locations/create/', views.TaggedLocationCreateView.as_view(),
          name='tagged_location_create'),
+
+    path('api/locations/<int:pk>/', views.TaggedLocationJsonView.as_view(),
+         name='api_tagged_location_detail'),
 ]
