@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
+    'taggit',
     'geodjango_tag',
 ]
 
@@ -58,7 +60,7 @@ ROOT_URLCONF = 'geodjango_tag_example.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'geodjango_tag_example', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from django.views.generic import CreateView, ListView
+from django.urls import reverse_lazy
+from geodjango_tag import models as geodjango_tag_models
 
-# Create your views here.
+
+class TaggedLocationListView(ListView):
+    model = geodjango_tag_models.TaggedLocation
+
+
+class TaggedLocationCreateView(CreateView):
+    model = geodjango_tag_models.TaggedLocation
+    fields = ['name', 'location', 'tags']
+    success_url = reverse_lazy('tagged_location_list')
+

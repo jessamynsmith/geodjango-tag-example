@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Tagged Location{% endblock %}
+
+{% block head_injections %}
+    {{ form.media }}
+{% endblock %}
+
+{% block body %}
+
+    <h3>Create Tagged Location</h3>
+
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+    </form>
+
+{% endblock %}

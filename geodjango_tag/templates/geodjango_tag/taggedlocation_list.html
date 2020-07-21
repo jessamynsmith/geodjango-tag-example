@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Tagged Locations{% endblock %}
+
+{% block body %}
+
+    <h3>Tagged Locations</h3>
+
+    <table>
+    <tr>
+        <th>Name</th>
+        <th>Tags</th>
+    </tr>
+    {% for object in object_list %}
+        <tr>
+        <td>{{ object.name }}</td>
+        <td>{{ object.tags }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    <br>
+    <a href="{% url 'tagged_location_create' %}">Create</a>
+
+{% endblock %}
