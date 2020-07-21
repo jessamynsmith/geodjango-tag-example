@@ -6,10 +6,19 @@
 
     <h3>Tagged Locations</h3>
 
+    <form>
+    <input type="text" name="query" value="{{ query|default_if_none:'' }}">
+    <input type="submit" value="Search">
+    </form>
+    <br>
+
     <table>
     <tr>
         <th>Name</th>
         <th>Tags</th>
+        {% if query %}
+            <th>Num Matched Tags</th>
+        {% endif %}
     </tr>
     {% for object in object_list %}
         <tr>
@@ -19,6 +28,9 @@
             </a>
         </td>
         <td>{{ object.tags_text }}</td>
+        {% if query %}
+            <td>{{ object.num_tags }}</td>
+        {% endif %}
         </tr>
     {% endfor %}
     </table>
