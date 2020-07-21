@@ -1,11 +1,13 @@
 import re
 
+from django.conf import settings
 from django.core.serializers import serialize
 from django.db import models
 from django.views.generic import CreateView, DetailView, ListView
 from django.urls import reverse_lazy
 from jsonview.views import JsonView
 
+from geodjango_tag import forms as geodjango_tag_forms
 from geodjango_tag import models as geodjango_tag_models
 
 
@@ -34,10 +36,16 @@ class TaggedLocationListView(ListView):
 class TaggedLocationDetailView(DetailView):
     model = geodjango_tag_models.TaggedLocation
 
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data(*args, **kwargs)
+        context_data['zoom'] = settings.DEFAULT_ZOOM
+        context_data['location'] = settings.DEFAULT_LOCATION
+        return context_data
+
 
 class TaggedLocationCreateView(CreateView):
     model = geodjango_tag_models.TaggedLocation
-    fields = ['name', 'location', 'tags']
+    form_class = geodjango_tag_forms.TaggedLocationForm
     success_url = reverse_lazy('tagged_location_list')
 
 

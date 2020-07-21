@@ -122,3 +122,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+DEFAULT_ZOOM = '12'
+DEFAULT_LOCATION = {
+    # San Diego
+    'latitude': "32.7157",
+    'longitude': "-117.1611",
+}

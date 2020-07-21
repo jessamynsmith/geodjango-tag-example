@@ -34,7 +34,6 @@
     </tr>
     </table>
     <br>
-    <a href="{% url 'tagged_location_create' %}">Create</a>
 
 {% endblock %}
 
@@ -42,14 +41,13 @@
 
 <script type="text/javascript">
     function map_init(map, options) {
+        var lon = {{ location.longitude }};
+        var lat = {{ location.latitude }};
+        map.setView([lat, lon], {{ zoom }});
+
         var locationPoly = {{ object.get_location_geo_json|safe }};
         console.log(locationPoly);
-        // TODO get real lat and lon
-        var lon = "-117.1611";
-        var lat = "32.7157";
-
         // zoom to point & add it to map
-        map.setView([lat, lon], 10);
         L.geoJSON(locationPoly);
     }
 </script>
