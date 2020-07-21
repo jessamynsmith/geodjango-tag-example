@@ -3,8 +3,17 @@
 {% load leaflet_tags %}
 
 {% block head_injections %}
+    <style>
+        .map {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
 {% leaflet_css %}
 {% leaflet_js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"
+            integrity="sha512-Abr21JO2YqcJ03XGZRPuZSWKBhJpUAR6+2wH5zBeO4wAw4oksr8PRdF+BKIRsxvCdq+Mv4670rZ+dLnIyabbGw=="
+            crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block title %}Tagged Location{% endblock %}
@@ -20,11 +29,11 @@
     </tr>
     <tr>
         <th>Tags:</th>
-        <td>{{ object.tags }}</td>
+        <td>{{ object.tags_text }}</td>
     </tr>
     <tr>
         <th>Location:</th>
-        <td>{% leaflet_map "main" callback="map_init" %}</td>
+        <td><div class="map">{% leaflet_map "main" callback="map_init" %}</div></td>
     </tr>
     </table>
     <br>
@@ -36,15 +45,15 @@
 
 <script type="text/javascript">
     function map_init(map, options) {
+        var locationPoly = {{ object.get_location_geo_json|safe }};
+        console.log(locationPoly);
         // TODO get real lat and lon
         var lon = "-117.1611";
         var lat = "32.7157";
 
         // zoom to point & add it to map
         map.setView([lat, lon], 10);
-        //var datasets_yourmodel = new L.GeoJSON.AJAX("{% url 'api_tagged_location_detail' pk=object.pk %}",{
-           //query popup or color of polygon here
-        //}).addTo(map)
+        L.geoJSON(locationPoly);
     }
 </script>
 
