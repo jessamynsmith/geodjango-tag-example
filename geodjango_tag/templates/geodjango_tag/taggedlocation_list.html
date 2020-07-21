@@ -13,7 +13,11 @@
     </tr>
     {% for object in object_list %}
         <tr>
-        <td>{{ object.name }}</td>
+        <td>
+            <a href="{% url 'tagged_location_detail' pk=object.pk %}">
+            {{ object.name }}
+            </a>
+        </td>
         <td>{{ object.tags }}</td>
         </tr>
     {% endfor %}

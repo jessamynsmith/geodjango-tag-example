@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load leaflet_tags %}
+
+{% block head_injections %}
+{% leaflet_css %}
+{% leaflet_js %}
+{% endblock %}
+
+{% block title %}Tagged Location{% endblock %}
+
+{% block body %}
+
+    <h3>Tagged Location</h3>
+
+    <table>
+    <tr>
+        <th>Name:</th>
+        <td>{{ object.name }}</td>
+    </tr>
+    <tr>
+        <th>Tags:</th>
+        <td>{{ object.tags }}</td>
+    </tr>
+    <tr>
+        <th>Location:</th>
+        <td>{% leaflet_map "main" callback="map_init" %}</td>
+    </tr>
+    </table>
+    <br>
+    <a href="{% url 'tagged_location_create' %}">Create</a>
+
+{% endblock %}
+
+{% block foot_injections %}
+
+<script type="text/javascript">
+    function map_init(map, options) {
+        // TODO get real lat and lon
+        var lon = "-117.1611";
+        var lat = "32.7157";
+
+        // zoom to point & add it to map
+        map.setView([lat, lon], 10);
+        L.marker([lat, lon]).addTo(map);
+    }
+</script>
+
+{% endblock %}
